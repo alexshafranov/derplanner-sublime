@@ -1,0 +1,97 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: derplanner
+scopeName: source.derplanner
+fileTypes: [domain]
+uuid: 8510cad0-ba2a-453b-88e2-3f0aaec80d3e
+
+patterns:
+- include: '#translation-unit'
+
+repository:
+
+  translation-unit:
+    name: meta.unit.derplanner
+    patterns:
+    - include: '#body'
+    - include: '#declaration-single-item'
+    - include: '#declaration-block'
+
+  body:
+    name: meta.body.derplanner
+    patterns:
+    - include: '#comment'
+    - include: '#literal'
+    - include: '#type'
+    - include: '#case'
+    - include: '#operator'
+    - include: '#call'
+
+  comment:
+    name: comment.derplanner
+    patterns:
+    - include: '#comment-line'
+
+  comment-line:
+    name: comment.line.derplanner
+    match: (//).*$\n?
+
+  literal:
+    name: literal.derplanner
+    patterns:
+    - include: '#numeric-literal'
+
+  numeric-literal:
+    name: constant.numeric.derplanner
+    match: \b[0-9]+(\.[0-9]+)?\b
+
+  type:
+    name: meta.type.derplanner
+    match: \b(int8|int32|int64|id32|id64|float|vec3)\b
+    captures:
+      '1': { name: storage.type.derplanner }
+
+  declaration-single-item:
+    name: meta.declaration.derplanner
+    match: \b(domain|fact|prim|task|macro|const)\b\s+([a-zA-Z_!\?][\w!\?]*)
+    captures:
+      '1': { name: storage.type.derplanner }
+      '2': { name: entity.name.type.derplanner }
+
+  declaration-block:
+    name: meta.declaration.block.derplanner
+    begin: \b(fact|prim|const|macro)\b
+    beginCaptures:
+      '1': { name: storage.type.derplanner }
+    end: \}
+    patterns:
+    - include: '#body'
+    - include: '#declaration-fact'
+
+  declaration-fact:
+    name: meta.declaration.fact.derplanner
+    match: \b([a-zA-Z_!\?][\w!\?]*)\b
+    captures:
+      '1': { name: entity.name.type.derplanner }
+
+  case:
+    name: meta.case.derplanner
+    match: \b(case|each)\b
+    captures:
+      '1': { name: keyword.control.derplanner }
+
+  operator:
+    name: keyword.operator.derplanner
+    match: \||&|=|==|~=|<|<=|>|>=|\+|-|\*|/
+
+  logic-operator:
+    name: keyword.operator.arithmetic.derplanner
+    match: ~|\||&|
+
+  call:
+    name: meta.funcion-call.derplanner
+    match: ([a-zA-Z_\!\?][\w\!\?]*)\s*\(
+    captures:
+      '1': { name: support.function.derplanner }
+
+...
