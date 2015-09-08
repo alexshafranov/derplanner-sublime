@@ -101,7 +101,7 @@
 		<key>declaration-block</key>
 		<dict>
 			<key>begin</key>
-			<string>\b(fact|prim|const|macro)\b</string>
+			<string>\b(fact|prim|extern|const|macro)\b</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -157,7 +157,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(domain|fact|prim|task|macro|const)\b\s+([a-zA-Z_!\?][\w!\?]*)</string>
+			<string>\b(domain|fact|prim|extern|task|macro|const)\b\s+([a-zA-Z_!\?][\w!\?]*)</string>
 			<key>name</key>
 			<string>meta.declaration.derplanner</string>
 		</dict>
