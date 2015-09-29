@@ -47,20 +47,20 @@ repository:
 
   type:
     name: meta.type.derplanner
-    match: \b(int8|int32|int64|id32|id64|float|vec3)\b
+    match: \b(int8|int32|int64|id32|id64|float|vec3|table)\b
     captures:
       '1': { name: storage.type.derplanner }
 
   declaration-single-item:
     name: meta.declaration.derplanner
-    match: \b(domain|fact|prim|extern|task|macro|const)\b\s+([a-zA-Z_!\?][\w!\?]*)
+    match: \b(domain|fact|prim|task|macro|const)\b\s+([a-zA-Z_!\?][\w!\?]*)
     captures:
       '1': { name: storage.type.derplanner }
       '2': { name: entity.name.type.derplanner }
 
   declaration-block:
     name: meta.declaration.block.derplanner
-    begin: \b(fact|prim|extern|const|macro)\b
+    begin: \b(fact|prim|const|macro)\b
     beginCaptures:
       '1': { name: storage.type.derplanner }
     end: \}
